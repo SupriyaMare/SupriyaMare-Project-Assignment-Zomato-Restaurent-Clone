@@ -4,10 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     accordions.forEach(accordion => {
         accordion.addEventListener('click', () => {
             const accordionData = accordion.nextElementSibling;
-            accordionData.classList.toggle('active');
+            accordionData.classList.toggle('show');
             const icon = accordion.querySelector('i');
-            icon.classList.toggle('fa-chevron-down');
-            icon.classList.toggle('fa-chevron-up');
+            icon.classList.toggle('animate');
         });
     });
 
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     emailRadio.addEventListener('change', () => {
         if (emailRadio.checked) {
-            emailInputSection.style.display = 'block';
+            emailInputSection.style.display = 'flex';
             phoneInputSection.style.display = 'none';
         }
     });
@@ -33,17 +32,53 @@ document.addEventListener('DOMContentLoaded', () => {
         if (phoneRadio.checked) {
             emailInputSection.style.display = 'none';
             emailInputSection.parentNode.insertBefore(phoneInputSection, emailInputSection.nextSibling);
-            phoneInputSection.style.display = 'block';
+            phoneInputSection.style.display = 'flex';
         }
     });
 
     // Initial state
     if (emailRadio.checked) {
-        emailInputSection.style.display = 'block';
+        emailInputSection.style.display = 'flex';
         phoneInputSection.style.display = 'none';
     } else if (phoneRadio.checked) {
         emailInputSection.style.display = 'none';
         emailInputSection.parentNode.insertBefore(phoneInputSection, emailInputSection.nextSibling);
-        phoneInputSection.style.display = 'block';
+        phoneInputSection.style.display = 'flex';
     }
+
+    // Scroll-to-top button functionality
+    const scrollToTopButton = document.getElementById('scroll-to-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollToTopButton.style.display = 'block';
+        } else {
+            scrollToTopButton.style.display = 'none';
+        }
+    });
+
+    scrollToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Mobile navigation toggle
+    const userIcon = document.querySelector('.user-icon');
+    const rightNav = document.querySelector('.right');
+
+    userIcon.addEventListener('click', () => {
+        rightNav.classList.toggle('show');
+    });
+
+    // Responsive navigation for mobile
+    const navItems = document.querySelectorAll('.nav-item a');
+    navItems.forEach(item => {
+        item.addEventListener('click', (event) => {
+            if (window.innerWidth <= 800) {
+                rightNav.classList.remove('show');
+            }
+            // Open link in a new tab
+            event.preventDefault();
+            window.open(item.href, '_blank');
+        });
+    });
 });
