@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-div {
+  transition: transform 0.2s;
+}
+
+.custom-div:hover {
+  transform: scale(1.05);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  /* background: #888; */
+  background: #E23744;
+  border-radius: 5px
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
